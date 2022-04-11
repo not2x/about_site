@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лето</title>
+    <style>
+        #days_counter {
+            color: rgb(106, 106, 255);
+            font-size: 96px;
+            margin-top: 20%;
+
+        }
+        body{
+            justify-content: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div id="days_counter"></div>
+</body>
+<script>
+    function num_word(value, words){  
+        value = Math.abs(value) % 100; 
+        var num = value % 10;
+        if(value > 10 && value < 20) return words[2]; 
+        if(num > 1 && num < 5) return words[1];
+        if(num == 1) return words[0]; 
+        return words[2];
+    }
+
+    let now = new Date();
+    let year = now.getFullYear()
+    let summer, msg
+    let endsummer = new Date(year, 7, 31)
+    summer = now.getTime() < endsummer.getTime() ? new Date(year, 5, 1) :  new Date((year+1), 5, 1)
+    if (now.getTime() < summer.getTime()) {
+        msg = 'до лета '
+        let days = Math.ceil((summer.getTime() - now.getTime()) / (1000 * 3600 * 24))
+        msg += num_word(days, ['остался', "осталось", "осталось"]) + " "  + days + ' ' + num_word(days, ['день', "дня", "дней"])
+    } else {
+        msg = 'до конца лета осталось '
+        let days = Math.ceil((endsummer.getTime() - now.getTime()) / (1000 * 3600 * 24))
+        msg += num_word(days, ['остался', "осталось", "осталось"]) + " "  + days + ' ' + num_word(days, ['день', "дня", "дней"])
+    }
+    document.getElementById('days_counter').innerText = msg
+    console.log(msg);
+</script>
+</html>
