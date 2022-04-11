@@ -33,10 +33,11 @@
     }
 
     let now = new Date();
+    //now = new Date(2022, 8, 1)
     let year = now.getFullYear()
     let summer, msg
     let endsummer = new Date(year, 7, 31)
-    summer = now.getTime() < endsummer.getTime() ? new Date(year, 5, 1) :  new Date((year+1), 5, 1)
+    summer = now.getTime() < endsummer.getTime()+86399000 ? new Date(year, 5, 1) :  new Date(((year)+1), 5, 1)
     if (now.getTime() < summer.getTime()) {
         msg = 'до лета '
         let days = Math.ceil((summer.getTime() - now.getTime()) / (1000 * 3600 * 24))
